@@ -3,6 +3,7 @@ package org.ftcTeam.opmodes.registrar1;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.ftcTeam.configurations.FTCTeamRobot;
+import org.ftcTeam.configurations.Team7394;
 import org.ftcbootstrap.ActiveOpMode;
 import org.ftcbootstrap.components.operations.motors.GamePadTankDrive;
 
@@ -18,7 +19,7 @@ import org.ftcbootstrap.components.operations.motors.GamePadTankDrive;
 @TeleOp
 public class GamePadDriveOpMode extends ActiveOpMode {
 
-    private FTCTeamRobot robot;
+    private Team7394 robot;
     private GamePadTankDrive gamePadTankDrive;
 
     /**
@@ -27,7 +28,7 @@ public class GamePadDriveOpMode extends ActiveOpMode {
     @Override
     protected void onInit() {
 
-        robot = FTCTeamRobot.newConfig(hardwareMap, getTelemetryUtil());
+        robot = Team7394.newConfig(hardwareMap, getTelemetryUtil());
 
         //Note The Telemetry Utility is designed to let you organize all telemetry data before sending it to
         //the Driver station via the sendTelemetry command

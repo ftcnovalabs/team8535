@@ -1,6 +1,6 @@
 package org.ftcTeam.opmodes;
 
-import org.ftcTeam.opmodes.registrar1.GamePadDriveOpMode;
+import org.ftcTeam.opmodes.registrar1.*;
 import org.ftcbootstrap.BootstrapRegistrar;
 import org.ftcbootstrap.demos.TelemetryTest;
 
@@ -15,6 +15,7 @@ public class Registrar1 extends BootstrapRegistrar {
     Class[] classes = {
 
             GamePadDriveOpMode.class,
+            TestAutonomous.class,
             TelemetryTest.class
 
     };
