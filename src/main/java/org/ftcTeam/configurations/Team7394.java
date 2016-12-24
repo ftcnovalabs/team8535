@@ -24,6 +24,7 @@ public class Team7394 extends RobotConfiguration {
     //motors
     public DcMotor motor1;
     public DcMotor motor2;
+    public DcMotor motor3;
     //public Servo servo;
 
     /**
@@ -57,6 +58,7 @@ public class Team7394 extends RobotConfiguration {
         motor1 = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
         motor2 = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
         motor2.setDirection(DcMotor.Direction.REVERSE);
+        motor3 = (DcMotor) getHardwareOn("motor3", hardwareMap.dcMotor);
 
 
     }

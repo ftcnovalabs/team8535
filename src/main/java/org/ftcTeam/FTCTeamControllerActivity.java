@@ -12,8 +12,8 @@ public class FTCTeamControllerActivity extends FtcRobotControllerActivity {
   @Override
   protected OpModeRegister createOpModeRegister() {
 
-      return new Registrar1();
-      //return new Registrar2();
+      //return new Registrar1();
+      return new Registrar2();
 
 
 

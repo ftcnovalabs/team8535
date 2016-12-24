@@ -1,16 +1,13 @@
-package org.ftcTeam.opmodes.registrar1;
+package org.ftcTeam.opmodes.registrar2;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.ftcTeam.configurations.FTCTeamRobot;
-import org.ftcTeam.configurations.MotorAndServoRobot;
 import org.ftcTeam.configurations.Team7394;
 import org.ftcbootstrap.ActiveOpMode;
-import org.ftcbootstrap.components.operations.motors.MotorToEncoder;
 import org.ftcbootstrap.components.operations.motors.TankDriveToEncoder;
 import org.ftcbootstrap.components.utils.DriveDirection;
-import org.ftcbootstrap.components.utils.MotorDirection;
 
 
 /**
@@ -35,7 +32,6 @@ public class TestAutonomous extends ActiveOpMode {
         robot = FTCTeamRobot.newConfig(hardwareMap, getTelemetryUtil());
         tankDriveToEncoder = new TankDriveToEncoder(this, robot.motor1, robot.motor2);
 
-
     }
 
     /**
@@ -48,8 +44,8 @@ public class TestAutonomous extends ActiveOpMode {
         boolean targetReached = false;
         //drive forward at .65 power until 10000 encoder position
         double power = .65;
-        int targetEncoderValue = 1000;
-        DriveDirection direction =  DriveDirection.SPIN_RIGHT;
+        int targetEncoderValue = 10000;
+        DriveDirection direction =  DriveDirection.DRIVE_FORWARD;
         DcMotor.RunMode mode = DcMotor.RunMode.RUN_TO_POSITION;
 
         targetReached =
@@ -61,5 +57,6 @@ public class TestAutonomous extends ActiveOpMode {
 
 
     }
+
 
 }

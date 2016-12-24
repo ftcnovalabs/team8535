@@ -1,8 +1,5 @@
 package org.ftcTeam.configurations;
 
-import android.graphics.Color;
-
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -19,23 +16,15 @@ import org.ftcbootstrap.components.utils.TelemetryUtil;
  * It is also assumed that the device names in the 'init()' method below are the same  as the devices named for the
  * saved configuration on the phone.
  */
-public class FTCTeamRobot extends RobotConfiguration {
+public class FTC8535TeamRobot extends RobotConfiguration {
 
     //sensors
-    //public TouchSensor touch;
-    public ColorSensor color0;
-    public ColorSensor color1;
-    public ColorSensor color2;
-    public ColorSensor colorFloor;
-
+    public TouchSensor touch;
 
     //motors
     public DcMotor motor1;
     public DcMotor motor2;
-    public DcMotor motor3;
-  //  public Servo clamp_left;
-   // public Servo clamp_right;
-    public Object RunMode;
+    public Servo servo;
 
     /**
      * Factory method for this class
@@ -44,9 +33,9 @@ public class FTCTeamRobot extends RobotConfiguration {
      * @param telemetryUtil
      * @return
      */
-    public static FTCTeamRobot newConfig(HardwareMap hardwareMap, TelemetryUtil telemetryUtil) {
+    public static FTC8535TeamRobot newConfig(HardwareMap hardwareMap, TelemetryUtil telemetryUtil) {
 
-        FTCTeamRobot config = new FTCTeamRobot();
+        FTC8535TeamRobot config = new FTC8535TeamRobot();
         config.init(hardwareMap, telemetryUtil);
         return config;
 
@@ -64,16 +53,10 @@ public class FTCTeamRobot extends RobotConfiguration {
         setTelemetry(telemetryUtil);
 
         //touch = (TouchSensor) getHardwareOn("touch", hardwareMap.touchSensor);
-        color0 = (ColorSensor) getHardwareOn("color0", hardwareMap.colorSensor);
-        color1 = (ColorSensor) getHardwareOn("color1", hardwareMap.colorSensor);
-        color2 = (ColorSensor) getHardwareOn("color2", hardwareMap.colorSensor);
-        colorFloor = (ColorSensor) getHardwareOn("colorFloor", hardwareMap.colorSensor);
-        //clamp_left = (Servo) getHardwareOn("clamp_left", hardwareMap.servo);
-        //clamp_right = (Servo) getHardwareOn("clamp_right", hardwareMap.servo);
+       // servo = (Servo) getHardwareOn("servo", hardwareMap.servo);
         motor1 = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
-        motor2 = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
-        motor2.setDirection(DcMotor.Direction.REVERSE);
-        motor3 = (DcMotor) getHardwareOn("motor3", hardwareMap.dcMotor);
+       // motor2 = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
+       // motor2.setDirection(DcMotor.Direction.REVERSE);
 
 
     }

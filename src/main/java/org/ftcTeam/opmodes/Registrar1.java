@@ -16,7 +16,7 @@ public class Registrar1 extends BootstrapRegistrar {
 
             GamePadDriveOpMode.class,
             TestAutonomous.class,
-            TelemetryTest.class
+            TelemetryTest.class,
 
     };
 
