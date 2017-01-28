@@ -59,7 +59,7 @@ public class BasicAutonomousRed extends ActiveOpMode {
 
         robot = FTCTeamRobot.newConfig(hardwareMap, getTelemetryUtil());
         tankDriveToEncoder = new TankDriveToEncoder(this, robot.motor1, robot.motor2);
-        motorToEncoder = new MotorToEncoder(this, robot.motor3);
+        motorToEncoder = new MotorToEncoder(this, robot.spinner);
 
         //  isBlue = true;
     }

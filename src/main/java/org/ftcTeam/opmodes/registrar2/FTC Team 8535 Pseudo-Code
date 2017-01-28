@@ -1,0 +1,27 @@
+State 0. PBL to E
+State 1. DB to E
+State 2. DB to C(at reduced speed)
+State 2_5. STB to E
+State 3. LFB to RF(at unknown speed)
+State 4. PB to AC(pressing correct button, store result)
+State 5. PFR to E(parallel to the wall)
+State 6. DB to E
+State 7. DB to C(at reduced speed)
+State 8. LFB to RF(at unknown speed)
+State 9. PB to AC(pressing correct button, check result)
+if second beacon is !AC {
+State 9InCorrect.     DF to E
+    wait 5ish seconds
+State 9_5InCorrect.     DB to E
+}
+State 10. PFL to E(parallel to the wall)
+if fist beacon is !AC {
+State 10InCorrect.     DB to E
+State 10_5Incorrect.     DB to C(at reduced speed)
+State 10_75Incorrect.     LFB to RF(at unknown speed, HULK SMASH)
+State 10_9Incorrect.     PFL to E (parallel to the wall)
+}
+State 11. DB to C (detect corner vortex under robot)
+State 12. PBR to E (park on corner vortex)
+
+

@@ -1,6 +1,7 @@
 package org.ftcTeam.opmodes.registrar2;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.ftcTeam.configurations.FTCTeamRobot;
@@ -32,8 +33,8 @@ public class TestRunToColor extends ActiveOpMode {
     @Override
     protected void onInit() {
 
-        robot = FTCTeamRobot.newConfig(hardwareMap, getTelemetryUtil());
         colorSensorComponentFloor = new ColorSensorComponent(this, robot.colorFloor, ColorSensorComponent.ColorSensorDevice.MODERN_ROBOTICS_I2C, I2cAddr.create8bit(0x50));
+        robot = FTCTeamRobot.newConfig(hardwareMap, getTelemetryUtil());
         //tankDriveToEncoder = new TankDriveToEncoder(this, robot.motor1, robot.motor2);
         tankDriveToColor = new TankDriveToColor(this, colorSensorComponentFloor,robot.motor1,robot.motor2);
 
@@ -47,21 +48,15 @@ public class TestRunToColor extends ActiveOpMode {
     protected void activeLoop() throws InterruptedException {
 
         boolean targetReached = false;
-        //drive forward until color reached
-        double power = 1.0;
-        int targetR = 50;
+        //drive forward at .65 power until 10000 encoder position
+        double power = .1;
         int targetB = 50;
+        int targetR = 50;
         int targetG = 50;
         DriveDirection direction =  DriveDirection.DRIVE_BACKWARD;
-        DcMotor.RunMode mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER;
 
-        targetReached = tankDriveToColor.runToTarget(power, targetR, targetB, targetG, direction);
-
-        telemetry.addData("Floor R: ", colorSensorComponentFloor.getR());
-        telemetry.addData("Floor G: ", colorSensorComponentFloor.getG());
-        telemetry.addData("Floor B: ", colorSensorComponentFloor.getB());
-
-        telemetry.update();
+        targetReached =
+        tankDriveToColor.runToTarget(power, targetR, targetB, targetG, direction);
 
         if (targetReached) {
             setOperationsCompleted();
@@ -70,5 +65,6 @@ public class TestRunToColor extends ActiveOpMode {
 
     }
 
+    }
 
-}
+

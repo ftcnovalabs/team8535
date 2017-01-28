@@ -45,8 +45,8 @@ import java.util.ArrayList;
  */
 
 @Autonomous
-public class AutonomousRed extends ActiveOpMode {
-    private  double motorPower = 1;
+public class AutonomousBlueWithSensors extends ActiveOpMode {
+    private  double motorPower = .5;
     private FTCTeamRobot robot;
     private TankDriveToColor tankDriveToColor;
     private ColorSensorComponent colorSensorComponentFloor;
@@ -55,7 +55,8 @@ public class AutonomousRed extends ActiveOpMode {
     private ColorSensorComponent colorSensorComponent1;
     private ColorSensorComponent colorSensorComponent2;
 
-    boolean isBlue = false;
+    boolean isBlue = true;
+    boolean sleepBetweenStates = true;
 
     private boolean firstBeaconIsTeamColor;
     // define states of robot
@@ -131,7 +132,7 @@ public class AutonomousRed extends ActiveOpMode {
         colorSensorComponentFloor = new ColorSensorComponent(this, robot.colorFloor, ColorSensorComponent.ColorSensorDevice.MODERN_ROBOTICS_I2C, I2cAddr.create8bit(0x50));
 
         tankDriveToColor = new TankDriveToColor(this, colorSensorComponentFloor,robot.motor1,robot.motor2);
-        lineFollowToRangeFinder = new LineFollowToRangeFinder(this, robot.rangeFinder, DriveDirection.DRIVE_BACKWARD, colorSensorComponentFloor, true, new TankDrive(this, robot.motor1, robot.motor2), new ODSComponent(this, robot.rangeFinder));
+        lineFollowToRangeFinder = new LineFollowToRangeFinder(this,  robot.rangeFinder,DriveDirection.DRIVE_BACKWARD, colorSensorComponentFloor, true, new TankDrive(this, robot.motor1, robot.motor2), new ODSComponent(this, robot.rangeFinder) );
         tankDriveToEncoder = new TankDriveToEncoder(this, robot.motor1, robot.motor2);
         colorSensorComponent0 = new ColorSensorComponent(this, robot.color0, ColorSensorComponent.ColorSensorDevice.MODERN_ROBOTICS_I2C);
         //disable LED to allow sensor to measure light project from the beacon
@@ -157,8 +158,8 @@ public class AutonomousRed extends ActiveOpMode {
             boolean targetReached = false;
             //drive forward at motorPower power until 10000 encoder position
             double power = motorPower;
-            int targetEncoderValue = 2250;
-            DriveDirection direction = DriveDirection.PIVOT_BACKWARD_RIGHT;
+            int targetEncoderValue = 1000;
+            DriveDirection direction = DriveDirection.PIVOT_BACKWARD_LEFT;
             DcMotor.RunMode mode = DcMotor.RunMode.RUN_USING_ENCODER;
 
             telemetry.addLine("state0");
@@ -172,31 +173,41 @@ public class AutonomousRed extends ActiveOpMode {
             if (targetReached) {
                 state0 = false;
                 state0_5 = true;
+
+                if (sleepBetweenStates){
+                    sleep(3000);
+                }
+
             }
         } else if (state0_5) {
 
             boolean targetReached = false;
             //drive forward at motorPower power until 10000 encoder position
             double power = motorPower;
-            int targetEncoderValue = 12000;
+            int targetEncoderValue = 5000;
             DriveDirection direction = DriveDirection.DRIVE_BACKWARD;
             DcMotor.RunMode mode = DcMotor.RunMode.RUN_USING_ENCODER;
             telemetry.addLine("state0_5");
+            telemetry.addData("motor1 pos: ", robot.motor1.getCurrentPosition());
+            telemetry.addData("motor2 pos: ", robot.motor2.getCurrentPosition());
             telemetry.update();
-
             targetReached =
                     tankDriveToEncoder.runToTarget(power, targetEncoderValue, direction, mode);
             if (targetReached) {
 
                 state0_5 = false;
                 state0_75 = true;
+
+                if (sleepBetweenStates){
+                    sleep(3000);
+                }
             }
         }  else if (state0_75) {
 
 
             boolean targetReached = false;
             //drive forward at .65 power until 10000 encoder position
-            double power = .65;
+            double power = .5;
             int targetB = 50;
             int targetR = 50;
             int targetG = 50;
@@ -210,18 +221,22 @@ public class AutonomousRed extends ActiveOpMode {
 
                 state0_75 = false;
                 state1 = true;
+
+                if (sleepBetweenStates){
+                    sleep(3000);
+                }
             }
         } else if (state1) {
             DcMotor.RunMode mode = DcMotor.RunMode.RESET_ENCODERS;
             boolean targetReached = false;
             //drive forward at motorPower power until 10000 encoder position
             double power = motorPower;
-            int targetEncoderValue = 1200;
+            int targetEncoderValue = 900;
             DriveDirection direction;
             if (isBlue) {
-                direction = DriveDirection.SPIN_RIGHT;
-            } else {
                 direction = DriveDirection.SPIN_LEFT;
+            } else {
+                direction = DriveDirection.SPIN_RIGHT;
             }            mode = DcMotor.RunMode.RUN_USING_ENCODER;
             telemetry.addLine("state1");
             telemetry.update();
@@ -230,38 +245,48 @@ public class AutonomousRed extends ActiveOpMode {
                     tankDriveToEncoder.runToTarget(power, targetEncoderValue, direction, mode);
 
             if (targetReached) {
-
-
                 state2 = true;
                 state1 = false;
+
+                if (sleepBetweenStates){
+                    sleep(3000);
+                }
+
             }
         } else if (state2) {
             boolean targetReached = false;
             //drive forward at motorPower power until 10000 encoder position
-            double power = motorPower;
+            double power = 0.2;
             // ** possible wheel wiggle issue: int targetEncoderValue = 2000;
             DriveDirection direction = DriveDirection.DRIVE_BACKWARD;
-            DcMotor.RunMode mode = DcMotor.RunMode.RUN_USING_ENCODER;
-            lineFollowToRangeFinder.setTarget(0.85);
-
+            lineFollowToRangeFinder.setTarget(0.55);
             telemetry.addData("ODS: ", lineFollowToRangeFinder.getOdsReading());
-            telemetry.update();
             telemetry.addLine("state2");
+            telemetry.addData("Floor B: ", colorSensorComponentFloor.getB());
+            telemetry.addData("Floor R: ", colorSensorComponentFloor.getR());
+            telemetry.addData("Floor G: ", colorSensorComponentFloor.getG());
             telemetry.update();
 
             targetReached =
-                    lineFollowToRangeFinder.targetReached();
-
+                    lineFollowToRangeFinder.lineFollowToTarget(power, 0.55, direction);
 
             if (targetReached) {
-
-
-                state3 = true;
-                state2 = false;
+                //state3 = true;
+                //state2 = false;
+                telemetry.addData("ODS: ", lineFollowToRangeFinder.getOdsReading());
+                telemetry.addLine("state2");
+                telemetry.addData("Floor B: ", colorSensorComponentFloor.getB());
+                telemetry.addData("Floor R: ", colorSensorComponentFloor.getR());
+                telemetry.addData("Floor G: ", colorSensorComponentFloor.getG());
+                telemetry.addLine("targetReached");
+                telemetry.update();
+                //setOperationsCompleted();
+                if (sleepBetweenStates){
+                    sleep(1000);
+                }
             }
         } else if (state3) {
-            /** TODO: Learn how to read the color sensor **/
-        // sleep because the needs to settle on a color.
+            // sleep because the beacon needs to settle on a color.
             sleep(500);
             firstBeaconIsTeamColor = colorSensorComponent0.isRed(10, 10, 10) || colorSensorComponent1.isRed(10, 10, 10) || colorSensorComponent2.isRed(10, 10, 10);
             telemetry.addData("0state3 B: ", colorSensorComponent0.getB());

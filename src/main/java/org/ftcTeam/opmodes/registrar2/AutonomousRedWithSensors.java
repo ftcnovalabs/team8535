@@ -45,7 +45,7 @@ import java.util.ArrayList;
  */
 
 @Autonomous
-public class AutonomousRed extends ActiveOpMode {
+public class AutonomousRedWithSensors extends ActiveOpMode {
     private  double motorPower = 1;
     private FTCTeamRobot robot;
     private TankDriveToColor tankDriveToColor;
@@ -261,7 +261,7 @@ public class AutonomousRed extends ActiveOpMode {
             }
         } else if (state3) {
             /** TODO: Learn how to read the color sensor **/
-        // sleep because the needs to settle on a color.
+            // sleep because the needs to settle on a color.
             sleep(500);
             firstBeaconIsTeamColor = colorSensorComponent0.isRed(10, 10, 10) || colorSensorComponent1.isRed(10, 10, 10) || colorSensorComponent2.isRed(10, 10, 10);
             telemetry.addData("0state3 B: ", colorSensorComponent0.getB());

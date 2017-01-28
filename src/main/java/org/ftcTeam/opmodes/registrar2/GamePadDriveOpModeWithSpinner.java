@@ -24,13 +24,17 @@ public class GamePadDriveOpModeWithSpinner extends ActiveOpMode {
 
     private FTCTeamRobot robot;
     private GamePadTankDrive gamePadTankDrive;
-    private GamePadMotor motor3;
+    private GamePadMotor spinner;
+    private GamePadMotor scissorLeft;
+    private GamePadMotor scissorRight;
+    private GamePadMotor forkLift;
+
   //  private GamePadServo clamp_left;
     //private GamePadServo clamp_right;
 
 
-    //public GamePadDriveOpModeWithSpinner(DcMotor motor3) {
-    //    motor3 = null;
+    //public GamePadDriveOpModeWithSpinner(DcMotor spinner) {
+    //    spinner = null;
     //}
 
     /**
@@ -53,9 +57,13 @@ public class GamePadDriveOpModeWithSpinner extends ActiveOpMode {
         super.onStart();
 
         //create the operation  to perform a tank drive using the gamepad joysticks.
-        gamePadTankDrive = new GamePadTankDrive(this, gamepad1, robot.motor1, robot.motor2);
-        motor3 = new GamePadMotor(this, gamepad1, robot.motor3, GamePadMotor.Control.LB_RB_BUTTONS, 2.0f);
-   //     clamp_left = new GamePadServo(this, gamepad2, robot.clamp_left, GamePadServo.Control.LB_LT_TRIGGER, 1.0f);
+       gamePadTankDrive = new GamePadTankDrive(this, gamepad1, robot.motor1, robot.motor2);
+        spinner = new GamePadMotor(this, gamepad1, robot.spinner, GamePadMotor.Control.LB_RB_BUTTONS, 2.0f);
+        scissorLeft = new GamePadMotor(this, gamepad2, robot.scissorLeft, GamePadMotor.Control.LEFT_STICK_Y, 2.0f);
+        scissorRight = new GamePadMotor(this, gamepad2, robot.scissorRight, GamePadMotor.Control.LEFT_STICK_Y, 2.0f);
+        forkLift = new GamePadMotor(this, gamepad2, robot.forkLift, GamePadMotor.Control.RIGHT_STICK_X, 2.0f);
+
+        //     clamp_left = new GamePadServo(this, gamepad2, robot.clamp_left, GamePadServo.Control.LB_LT_TRIGGER, 1.0f);
      //   clamp_right = new GamePadServo(this, gamepad2, robot.clamp_right, GamePadServo.Control.RB_RT_TRIGGER, 1.0f);
 
     }
@@ -71,8 +79,12 @@ public class GamePadDriveOpModeWithSpinner extends ActiveOpMode {
 
         //update the motors with the gamepad joystick values
         gamePadTankDrive.update();
-        motor3.update();
-       // clamp_left.update();
+        spinner.update();
+        scissorLeft.update();
+        scissorRight.update();
+        forkLift.update();
+
+        // clamp_left.update();
      //   clamp_right.update();
 
         //send any telemetry that may have been added in the above operations

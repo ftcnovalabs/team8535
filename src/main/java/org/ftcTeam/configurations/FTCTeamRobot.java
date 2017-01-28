@@ -2,11 +2,14 @@ package org.ftcTeam.configurations;
 
 import android.graphics.Color;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.UltrasonicSensor;
 
 import org.ftcbootstrap.RobotConfiguration;
 import org.ftcbootstrap.components.utils.TelemetryUtil;
@@ -27,14 +30,25 @@ public class FTCTeamRobot extends RobotConfiguration {
     public ColorSensor color1;
     public ColorSensor color2;
     public ColorSensor colorFloor;
+    public OpticalDistanceSensor rangeFinder;
 
 
     //motors
     public DcMotor motor1;
     public DcMotor motor2;
-    public DcMotor motor3;
-  //  public Servo clamp_left;
-   // public Servo clamp_right;
+    public DcMotor spinner;
+    public DcMotor scissorLeft;
+    public DcMotor scissorRight;
+    public DcMotor forkLift;
+
+
+    //servos
+  //  public Servo armLeft;
+   // public Servo armRight;
+
+
+
+
     public Object RunMode;
 
     /**
@@ -64,16 +78,29 @@ public class FTCTeamRobot extends RobotConfiguration {
         setTelemetry(telemetryUtil);
 
         //touch = (TouchSensor) getHardwareOn("touch", hardwareMap.touchSensor);
-        color0 = (ColorSensor) getHardwareOn("color0", hardwareMap.colorSensor);
-        color1 = (ColorSensor) getHardwareOn("color1", hardwareMap.colorSensor);
-        color2 = (ColorSensor) getHardwareOn("color2", hardwareMap.colorSensor);
-        colorFloor = (ColorSensor) getHardwareOn("colorFloor", hardwareMap.colorSensor);
-        //clamp_left = (Servo) getHardwareOn("clamp_left", hardwareMap.servo);
-        //clamp_right = (Servo) getHardwareOn("clamp_right", hardwareMap.servo);
-        motor1 = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
-        motor2 = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
-        motor2.setDirection(DcMotor.Direction.REVERSE);
-        motor3 = (DcMotor) getHardwareOn("motor3", hardwareMap.dcMotor);
+            color0 = (ColorSensor) getHardwareOn("color0", hardwareMap.colorSensor);
+            color1 = (ColorSensor) getHardwareOn("color1", hardwareMap.colorSensor);
+            color2 = (ColorSensor) getHardwareOn("color2", hardwareMap.colorSensor);
+            colorFloor = (ColorSensor) getHardwareOn("colorFloor", hardwareMap.colorSensor);
+
+            rangeFinder = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "rangeFinder");
+        //rangeFinder = (OpticalDistanceSensor) getHardwareOn("rangeFinder", hardwareMap.opticalDistanceSensor);
+
+            motor1 = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
+            motor2 = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
+        if (motor2 != null)
+            motor2.setDirection(DcMotor.Direction.REVERSE);
+         spinner = (DcMotor) getHardwareOn("spinner", hardwareMap.dcMotor);
+            scissorLeft = (DcMotor) getHardwareOn("scissorLeft", hardwareMap.dcMotor);
+            scissorRight = (DcMotor) getHardwareOn("scissorRight", hardwareMap.dcMotor);
+        if (scissorRight != null)
+            scissorRight.setDirection(DcMotor.Direction.REVERSE);
+        forkLift = (DcMotor) getHardwareOn("forkLift", hardwareMap.dcMotor);
+
+//            armLeft = (Servo) getHardwareOn("armLeft", hardwareMap.servo);
+  //          armRight = (Servo) getHardwareOn("armRight", hardwareMap.servo);
+    //    if (armRight != null)
+      //      armRight.setDirection(Servo.Direction.REVERSE);
 
 
     }

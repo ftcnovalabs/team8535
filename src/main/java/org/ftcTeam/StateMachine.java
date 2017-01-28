@@ -1,6 +1,7 @@
 package org.ftcTeam;
 
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 
 /**
@@ -49,6 +50,7 @@ public class StateMachine {
 
     public boolean beacon1Correct;
     public boolean beacon2Correct;
+    private ArrayList<State> states;
 
 
 
@@ -56,15 +58,11 @@ public class StateMachine {
 
     //private EnumMap<STATE,Integer> stateMap;
 
-    public StateMachine(boolean isBlue){
-    /*    stateMap = new EnumMap<STATE, Integer>(STATE.class);
+/*    public StateMachine(boolean isBlue){
+        states = new ArrayList<State>;
+        states.add(State(STATE.INITIAL, ))
         stateMap.put(STATE.INITIAL,0);
         stateMap.put(STATE.BEACON1_ALIGNED,10);
         stateMap.put(STATE.BEACON1_FACING,20);
         stateMap.put(STATE.BEACON1_PRESSED,30);*/
-
-
-    }
-
-
 }

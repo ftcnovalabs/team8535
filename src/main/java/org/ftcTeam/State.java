@@ -8,15 +8,11 @@ import java.util.ArrayList;
 
 public class State {
 
-    public enum DESCRIPTION {
-        INITIAL, BEACON1_ALIGNED, BEACON1_FACING, BEACON1_PRESSED
-    }
-
-    private DESCRIPTION name;
+    private String name;
     private ArrayList<State> allowedNextStates;
 
-    public State(State.DESCRIPTION _name, ArrayList<State> nextStatesToAllow) {
+    public State(String _name, ArrayList<State> _nextStatesToAllow) {
         name = _name;
-        allowedNextStates = nextStatesToAllow;
+        allowedNextStates = _nextStatesToAllow;
     }
 }
