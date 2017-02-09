@@ -26,20 +26,20 @@ public class FTCTeamRobot extends RobotConfiguration {
 
     //sensors
     //public TouchSensor touch;
-    public ColorSensor color0;
-    public ColorSensor color1;
+    public ColorSensor colorLeft;
+    public ColorSensor colorRight;
     public ColorSensor color2;
     public ColorSensor colorFloor;
     public OpticalDistanceSensor rangeFinder;
 
 
     //motors
-    public DcMotor motor1;
-    public DcMotor motor2;
+    public DcMotor driveLeft;
+    public DcMotor driveRight;
     public DcMotor spinner;
     public DcMotor scissorLeft;
     public DcMotor scissorRight;
-    public DcMotor forkLift;
+    public DcMotor grabber;
 
 
     //servos
@@ -77,31 +77,25 @@ public class FTCTeamRobot extends RobotConfiguration {
 
         setTelemetry(telemetryUtil);
 
-        //touch = (TouchSensor) getHardwareOn("touch", hardwareMap.touchSensor);
-            color0 = (ColorSensor) getHardwareOn("color0", hardwareMap.colorSensor);
-            color1 = (ColorSensor) getHardwareOn("color1", hardwareMap.colorSensor);
-            color2 = (ColorSensor) getHardwareOn("color2", hardwareMap.colorSensor);
-            colorFloor = (ColorSensor) getHardwareOn("colorFloor", hardwareMap.colorSensor);
+        colorLeft = (ColorSensor) getHardwareOn("colorLeft", hardwareMap.colorSensor);
+        colorRight = (ColorSensor) getHardwareOn("colorRight", hardwareMap.colorSensor);
+        color2 = (ColorSensor) getHardwareOn("color2", hardwareMap.colorSensor);
+        colorFloor = (ColorSensor) getHardwareOn("colorFloor", hardwareMap.colorSensor);
 
-            rangeFinder = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "rangeFinder");
-        //rangeFinder = (OpticalDistanceSensor) getHardwareOn("rangeFinder", hardwareMap.opticalDistanceSensor);
+        rangeFinder = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "rangeFinder");
 
-            motor1 = (DcMotor) getHardwareOn("motor1", hardwareMap.dcMotor);
-            motor2 = (DcMotor) getHardwareOn("motor2", hardwareMap.dcMotor);
-        if (motor2 != null)
-            motor2.setDirection(DcMotor.Direction.REVERSE);
+        driveRight = (DcMotor) getHardwareOn("driveRight", hardwareMap.dcMotor);
+        driveLeft = (DcMotor) getHardwareOn("driveLeft", hardwareMap.dcMotor);
+        if (driveRight != null)
+            driveRight.setDirection(DcMotor.Direction.REVERSE);
          spinner = (DcMotor) getHardwareOn("spinner", hardwareMap.dcMotor);
-            scissorLeft = (DcMotor) getHardwareOn("scissorLeft", hardwareMap.dcMotor);
-            scissorRight = (DcMotor) getHardwareOn("scissorRight", hardwareMap.dcMotor);
+        scissorLeft = (DcMotor) getHardwareOn("scissorLeft", hardwareMap.dcMotor);
+        if (scissorLeft != null)
+            scissorLeft.setDirection(DcMotor.Direction.REVERSE);
+        scissorRight = (DcMotor) getHardwareOn("scissorRight", hardwareMap.dcMotor);
         if (scissorRight != null)
             scissorRight.setDirection(DcMotor.Direction.REVERSE);
-        forkLift = (DcMotor) getHardwareOn("forkLift", hardwareMap.dcMotor);
-
-//            armLeft = (Servo) getHardwareOn("armLeft", hardwareMap.servo);
-  //          armRight = (Servo) getHardwareOn("armRight", hardwareMap.servo);
-    //    if (armRight != null)
-      //      armRight.setDirection(Servo.Direction.REVERSE);
-
+        grabber = (DcMotor) getHardwareOn("grabber", hardwareMap.dcMotor);
 
     }
 

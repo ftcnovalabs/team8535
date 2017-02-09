@@ -33,7 +33,7 @@ public class TestAutonomous extends ActiveOpMode {
     protected void onInit() {
 
         robot = FTCTeamRobot.newConfig(hardwareMap, getTelemetryUtil());
-        tankDriveToEncoder = new TankDriveToEncoder(this, robot.motor1, robot.motor2);
+        tankDriveToEncoder = new TankDriveToEncoder(this, robot.driveLeft, robot.driveRight);
 
 
     }
